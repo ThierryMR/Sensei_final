@@ -1,0 +1,10 @@
+<div class="container">
+  <h1 class="text-center">Rating Aula #<%= @lesson_request.id %> </h1>
+
+  <%= form_for [:close, @chat_room] do |f| %>
+    <%= f.check_box :rating %>
+    <%= f.submit %>
+  <% end %>
+
+
+</div>
