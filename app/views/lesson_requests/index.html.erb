@@ -1,8 +1,8 @@
 <div class="container">
   <% if params[:format] == "sensei" %>
-    <h1 class="text-center">Minhas aulas - Sensei <strong><%= current_user.sensei.user.username %></strong></h1>
+  <h1 class="text-center">Minhas aulas - Sensei <strong><%= current_user.sensei.user.username %></strong></h1>
   <% else %>
-    <h1 class="text-center">Minhas aulas - Estudante</h1>
+  <h1 class="text-center">Minhas aulas - Estudante</h1>
   <% end %>
 
 
@@ -10,24 +10,28 @@
     <% @lesson_requests.each do |lesson| %>
     <div class="container">
       <li class="list-group-item">
-            <%= link_to lesson do %>
-              <h1><strong>Aula #<%= lesson.id %></strong></h2>
+        <%= link_to lesson do %>
+        <h1><strong>Aula #<%= lesson.id %></strong></h2>
+          <% end %>
+          <h2><strong>Aluno: </strong><%= lesson.user.username %></h2>
+          <h2><strong>Matéria: </strong><%= lesson.subject.title %></h2>
+          <h3><strong>Descrição: </strong><%= lesson.description %></h3>
+          <h3><strong>Duração: </strong><%= lesson.duration %> minutos</h3>
+          <h3><strong>Valor total: </strong><%= number_to_currency(lesson.amount) %></h3>
+          <h3><strong>Status: </strong>
+            <% if @chat_room.nil? %>
+            <%= "Aula concluída" %>
+            <h3><strong>Rating: </strong></h3>
+            <% lesson.rating.times do %>
+            <%= icon("fa", "star") %>
             <% end %>
-            <h2><strong>Aluno: </strong><%= lesson.user.username %></h2>
-            <h2><strong>Matéria: </strong><%= lesson.subject.title %></h2>
-            <h3><strong>Descrição: </strong><%= lesson.description %></h3>
-            <h3><strong>Duração: </strong><%= lesson.duration %> minutos</h3>
-            <h3><strong>Valor total: </strong><%= number_to_currency(lesson.amount) %></h3>
-            <h3><strong>Status: </strong>
-              <% if @chat_room.nil? %>
-                <%= "Aula concluída" %>
-              <% else %>
-                <%= @lesson_request.sensei_accepted ? "Aula aceita" : "Aguardando sensei" %>
+            <% else %>
+            <%= @lesson_request.sensei_accepted ? "Aula aceita" : "Aguardando sensei" %>
             <% end %>
-            </h3>
-          </li>
-        </div>
-
-        <% end %>
+          </h3>
+        </li>
       </div>
+
+      <% end %>
     </div>
+  </div>

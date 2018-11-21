@@ -18,6 +18,10 @@
     <h3><strong>Status: </strong>
       <% if @chat_room.nil? %>
         <%= "Aula concluída" %>
+        <h3><strong>Rating: </strong></h3>
+        <% @lesson_request.rating.times do %>
+          <%= icon("fa", "star") %>
+        <% end %>
       <% else %>
         <%= @lesson_request.sensei_accepted ? "Aula aceita" : "Aguardando sensei" %>
       <% end %>
@@ -26,13 +30,17 @@
   <% if current_user == @lesson_request.sensei.user %>
     <% if @lesson_request.sensei_accepted == true %>
       <button id="sensei_cancel">Cancelar a aula</button>
-      <%= button_to "Entrar na sala", chat_room_path(@chat_room), method: :get unless @chat_room.nil?%>
+      <% unless @chat_room.nil? %>
+        <%= button_to "Entrar na sala", chat_room_path(@chat_room), method: :get unless @chat_room.nil?%>
+      <% end %>
     <% else %>
       <%= button_to "Aceitar a aula", lesson_request_sensei_accepted_path(@lesson_request), method: :get %>
     <% end %>
   <% else %>
     <% if @lesson_request.sensei_accepted == true %>
-      <%= button_to "Entrar na sala", chat_room_path(@chat_room), method: :get %>
+      <% unless @chat_room.nil? %>
+        <%= button_to "Entrar na sala", chat_room_path(@chat_room), method: :get %>
+      <% end %>
     <% else %>
       <button id="student_cancel">Cancelar esta aula</button>
     <% end %>
