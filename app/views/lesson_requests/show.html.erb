@@ -1,12 +1,15 @@
-<div class="container">
+<body class="sensei-index">
+<div class="container login-container text-center" id="lesson">
   <h1 class="text-center">Solicitação de Aula #<%= @lesson_request.id %></h1>
 
   <div class="container wrapp">
     <h2><strong>Sensei</strong>
       <br>
+     <%= cl_image_tag @lesson_request.sensei.user.photo, width:50,height:50, class:"img-circle" %>
       <%= @lesson_request.sensei.user.username %></h2>
     <h2><strong>Aluno</strong>
       <br>
+      <%= cl_image_tag @lesson_request.user.photo, width:50,height:50, class:"img-circle" %>
       <%= @lesson_request.user.username %></h2>
   </div>
 
@@ -28,21 +31,22 @@
     <% if @lesson_request.sensei_accepted == true %>
       <button id="sensei_cancel">Cancelar a aula</button>
       <% unless @chat_room.nil? %>
-        <%= button_to "Entrar na sala", chat_room_path(@chat_room), method: :get unless @chat_room.nil?%>
+        <%= button_to "Entrar na sala", chat_room_path(@chat_room), method: :get, class: 'btn btn-primary' unless @chat_room.nil?%>
       <% end %>
       <%= link_to 'Voltar', lesson_requests_path("sensei"), class: 'btn btn-primary' %>
     <% else %>
-      <%= button_to "Aceitar a aula", lesson_request_sensei_accepted_path(@lesson_request), method: :get %>
+      <%= button_to "Aceitar a aula", lesson_request_sensei_accepted_path(@lesson_request), method: :get, class: 'btn btn-primary' %>
     <% end %>
   <% else %>
     <% if @lesson_request.sensei_accepted == true %>
       <% unless @chat_room.nil? %>
-        <%= button_to "Entrar na sala", chat_room_path(@chat_room), method: :get %>
+        <%= button_to "Entrar na sala", chat_room_path(@chat_room), method: :get, class: 'btn btn-primary' %>
       <% end %>
     <% else %>
-      <button id="student_cancel">Cancelar esta aula</button>
+      <button id="student_cancel" class="btn btn-danger">Cancelar esta aula</button>
     <% end %>
     <%= link_to 'Voltar', lesson_requests_path("student"), class: 'btn btn-primary' %>
   <% end %>
 </div>
+</body>
 
