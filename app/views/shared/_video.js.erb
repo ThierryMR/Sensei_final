@@ -1,7 +1,6 @@
 var apiKey = <%= ENV['API_KEY'] %>;
 var sessionId = '<%= @chat_room.session_token %>';
 var token = '<%= @chat_room.generated_token %>';
-console.log(sessionId)
 
 const handleError = (errors) => {
   console.log('something happened')
@@ -14,8 +13,8 @@ const initializeSession = () => {
    // Create a publisher
   var publisher = OT.initPublisher('publisher', {
     insertMode: 'append',
-    width: '80%',
-    height: '600px'
+    width: '150px',
+    height: '100px',
   }, handleError);
 
   // Connect to the session
@@ -32,8 +31,8 @@ const initializeSession = () => {
   session.on('streamCreated', function(event) {
     session.subscribe(event.stream, 'subscriber', {
       insertMode: 'append',
-      width: '80%',
-      height: '500px'
+      width: '100vw',
+      height: 'calc(100vh - 70px)'
     }, handleError);
   });
 

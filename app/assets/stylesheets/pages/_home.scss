@@ -8,17 +8,6 @@
   width: 100%;
 }
 
-.video-container {
-  position: relative;
-
-  .banner-search {
-    position: absolute;
-    top: 55%;
-    left: 0%;
-    padding: 0 130px;
-  }
-}
-
 .start-now {
   position: absolute;
   top: 500px;
@@ -29,11 +18,27 @@
   margin-left: 10px;
 }
 
-video::-webkit-media-controls {
-  display: none;
-}
-
 .computer-pic{
   width:100%;
   margin-top:50px;
+}
+
+.subject-card{
+  color:white;
+  border: 1px solid black;
+  border-radius:10px;
+  padding:50px 20px;
+  margin-bottom:50px;
+}
+
+#math{
+  background-image: url(math.jpg);
+}
+
+#port{
+  background-image: url(port.jpg);
+}
+
+#quim{
+  background-image: url(quimica.jpg);
 }

@@ -1,54 +1,60 @@
-  <div id="videos">
-        <div id="subscriber"></div>
-        <div id="publisher"><%= current_user.email %>'s camera</div>
-    </div>
-<h1>a, mt bom dia </h1>
-
-<div class="container">
-  <div class="row">
-    <div class="col-sm-6 col-sm-offset-3">
-      <div class="chat-header"><h4>#<%= @chat_room.name %></h4></div>
-      <div class="messages">
-        <% @chat_room.messages.order(created_at: :asc).each do |message| %>
-          <%= render "messages/message", message: message, user_is_messages_author:
-          message.user == current_user %>
-        <% end %>
+<div>
+    <div id="videos">
+        <div class="row">
+          <div class="col-xs-12">
+            <div id="publisher"> Your camera</div><div id="subscriber"></div>
+          </div>
+        </div>
       </div>
-      <div id="create-message">
-        <%= simple_form_for [ @chat_room, Message.new ], remote: true do |f| %>
-          <%= f.input :content, label: false %>
-        <% end %>
+  <h1>a, mt bom dia </h1>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <div class="chat-header"><h4>#<%= @chat_room.name %></h4></div>
+        <div class="messages">
+          <% @chat_room.messages.order(created_at: :asc).each do |message| %>
+            <%= render "messages/message", message: message, user_is_messages_author:
+            message.user == current_user %>
+          <% end %>
+        </div>
+        <div id="create-message">
+          <%= simple_form_for [ @chat_room, Message.new ], remote: true do |f| %>
+            <%= f.input :content, label: false %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<% content_for :after_js do %>
-  <script>
+  <% content_for :after_js do %>
+    <script>
 
-    App['chat_room_<%= @chat_room.id %>'] = App.cable.subscriptions.create(
-      {
-      channel: 'ChatRoomsChannel',
-      chat_room_id: <%= @chat_room.id %>
-      },
-      {
-        received: (data) => {
-          if (data.current_user_id !== <%= current_user.id %>) {
-          var messagesContainer = document.querySelector('.messages');
-          messagesContainer.insertAdjacentHTML('beforeend', data.message_partial);
+      App['chat_room_<%= @chat_room.id %>'] = App.cable.subscriptions.create(
+        {
+        channel: 'ChatRoomsChannel',
+        chat_room_id: <%= @chat_room.id %>
+        },
+        {
+          received: (data) => {
+            if (data.current_user_id !== <%= current_user.id %>) {
+            var messagesContainer = document.querySelector('.messages');
+            messagesContainer.insertAdjacentHTML('beforeend', data.message_partial);
 
+          }
+          }
         }
-        }
-      }
-    );
+      );
 
-  </script>
-<% end %>
-
-
-<% content_for(:after_js) do %>
-  <%= javascript_tag do %>
-    <%= render(:partial => 'shared/video', :handlers => [:erb], :formats => [:js]) %>
+    </script>
   <% end %>
-<% end %>
+
+
+  <% content_for(:after_js) do %>
+    <%= javascript_tag do %>
+      <%= render(:partial => 'shared/video', :handlers => [:erb], :formats => [:js]) %>
+    <% end %>
+  <% end %>
 
 <%= button_to "Finalizar a aula", chat_room_rating_path(@chat_room), method: :get %>
+
+</div>
