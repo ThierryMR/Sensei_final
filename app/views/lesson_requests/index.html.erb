@@ -18,7 +18,13 @@
             <h3><strong>Descrição: </strong><%= lesson.description %></h3>
             <h3><strong>Duração: </strong><%= lesson.duration %> minutos</h3>
             <h3><strong>Valor total: </strong><%= number_to_currency(lesson.amount) %></h3>
-            <h3><strong>Status: </strong><%= lesson.sensei_accepted ? "Aula aceita" : "Aguardando sensei" %></h3>
+            <h3><strong>Status: </strong>
+              <% if @chat_room.nil? %>
+                <%= "Aula concluída" %>
+              <% else %>
+                <%= @lesson_request.sensei_accepted ? "Aula aceita" : "Aguardando sensei" %>
+            <% end %>
+            </h3>
           </li>
         </div>
 

@@ -10,4 +10,9 @@ class ChatRoomsController < ApplicationController
     @chat_room.save
     redirect_to @chat_room
   end
+
+  def rating
+    @chat_room = ChatRoom.find(params[:chat_room_id])
+    @lesson_request = @chat_room.lesson_request
+  end
 end
