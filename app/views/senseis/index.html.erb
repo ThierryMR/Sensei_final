@@ -2,17 +2,18 @@
   <div class="container">
     <div class="sensei-profile">
       <% if params[:query].nil? || params[:query].empty? %>
-        <h1 class="text-center"> Senseis<i class="fas fa-chalkboard-teacher"></i></h1>
+        <h1 class="text-center"> Senseis</h1>
       <% else %>
         <h1 class="text-center"> Senseis de <%= params[:query] %> <i class="fas fa-chalkboard-teacher"></i></h1>
       <% end %>
-      <div class="row">
+      <div class="row senseis-container">
         <% if @senseis.length.zero? %>
         <h4 style="color: gray; text-align: center"> Desculpe, não há Senseis disponíveis para "<%= params[:query] %>"</h4>
         <% end %>
         <% @senseis.each do |sensei| %>
+          <% unless sensei.sensei_subjects.empty? %>
             <%= link_to sensei_path(sensei) do %>
-              <div class="col-xs-8 sensei-profile-index">
+              <div class="col-xs-8 col-xs-offset-2 sensei-profile-index">
                 <div class="row">
                   <div class="col-xs-4">
                   <%= cl_image_tag sensei.user.photo , height: 200, width: 200,class: 'img-circle', crop: :fill;%>
@@ -26,6 +27,7 @@
                 </div>
               </div>
               <% end %>
+            <% end %>
           <% end %>
       </div>
     </div>
