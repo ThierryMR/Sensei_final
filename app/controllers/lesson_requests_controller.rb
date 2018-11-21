@@ -36,10 +36,19 @@ class LessonRequestsController < ApplicationController
     end
   end
 
-  def destroy
+  def update
+    @lesson_request = LessonRequest.find(params[:id])
+    @lesson_request.update(params_lesson_request)
+    if @lesson_request.save
+      chat_room = ChatRoom.where(lesson_request_id: @lesson_request.id).first
+      chat_room.destroy
+      redirect_to @lesson_request
+    else
+      raise
+    end
   end
 
   def params_lesson_request
-    params.require(:lesson_request).permit(:sensei_id, :subject_id, :duration, :description)
+    params.require(:lesson_request).permit(:sensei_id, :subject_id, :duration, :description, :rating)
   end
 end

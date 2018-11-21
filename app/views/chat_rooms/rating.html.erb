@@ -1,0 +1,10 @@
+<div class="container">
+  <h1 class="text-center">Rating Aula #<%= @lesson_request.id %> </h1>
+
+  <%= form_for @lesson_request do |f| %>
+    <%= f.select :rating, [1, 2, 3, 4, 5] %>
+    <%= f.submit %>
+  <% end %>
+
+
+</div>
