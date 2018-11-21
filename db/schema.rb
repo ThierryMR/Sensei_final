@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_20_215420) do
+ActiveRecord::Schema.define(version: 2018_11_21_171449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2018_11_20_215420) do
     t.datetime "updated_at", null: false
     t.integer "duration"
     t.integer "rating"
+    t.string "status", default: "Aguardando Sensei"
     t.index ["sensei_id"], name: "index_lesson_requests_on_sensei_id"
     t.index ["subject_id"], name: "index_lesson_requests_on_subject_id"
     t.index ["user_id"], name: "index_lesson_requests_on_user_id"
@@ -66,12 +67,6 @@ ActiveRecord::Schema.define(version: 2018_11_20_215420) do
     t.datetime "updated_at", null: false
     t.index ["chat_room_id"], name: "index_messages_on_chat_room_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
-  end
-
-  create_table "school_subjects", force: :cascade do |t|
-    t.string "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "sensei_subjects", force: :cascade do |t|
@@ -89,8 +84,6 @@ ActiveRecord::Schema.define(version: 2018_11_20_215420) do
     t.float "avg_rating", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "school_subject_id"
-    t.index ["school_subject_id"], name: "index_senseis_on_school_subject_id"
     t.index ["user_id"], name: "index_senseis_on_user_id"
   end
 
@@ -128,6 +121,5 @@ ActiveRecord::Schema.define(version: 2018_11_20_215420) do
   add_foreign_key "messages", "users"
   add_foreign_key "sensei_subjects", "senseis"
   add_foreign_key "sensei_subjects", "subjects"
-  add_foreign_key "senseis", "school_subjects"
   add_foreign_key "senseis", "users"
 end
