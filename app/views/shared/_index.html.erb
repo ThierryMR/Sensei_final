@@ -1,43 +1,32 @@
-
-  <% if params[:format] == "sensei" %>
-  <h1 class="text-center">Minhas aulas - Sensei <strong><%= current_user.sensei.user.username %></strong></h1>
-  <% else %>
-  <h1 class="text-center">Minhas aulas - Estudante</h1>
-  <% end %>
+<h3 class="text-center">Minhas aulas</h3>
 
 
-  <ul class="list-group text-left">
-    <% @lesson_requests.each do |lesson| %>
-        <li class="list-group-item">
-          <%= link_to lesson do %>
-            <p><strong>Aula #<%= lesson.id %></strong></p>
+<ul class="list-group text-left">
+  <% @lesson_requests.each do |lesson| %>
+  <li class="list-group-item">
+    <%= link_to lesson do %>
+    <p><strong>Aula #<%= lesson.id %></strong></p>
+    <% end %>
+    <div class="shared-index">
+      <div>
+        <p><strong>Aluno: </strong><%= lesson.user.username %></p>
+        <p><strong>Matéria: </strong><%= lesson.subject.title %></p>
+        <p><strong>Descrição: </strong><%= lesson.description %></p>
+      </div>
+      <div>
+        <p><strong>Duração: </strong><%= lesson.duration %> minutos</p>
+        <p><strong>Status: </strong><%= lesson.status %></p>
+        <p><% if ChatRoom.where(lesson_request_id: lesson.id).first.nil? && lesson.status != "Aguardando Sensei" %>
+          <strong>Rating: </strong>
+          <% lesson.rating.times do %>
+          <%= icon("fa", "star") %>
+          <% end %></p>
           <% end %>
-          <div class="shared-index">
-            <div>
-              <p><strong>Aluno: </strong><%= lesson.user.username %></p>
-              <p><strong>Matéria: </strong><%= lesson.subject.title %></p>
-              <p><strong>Descrição: </strong><%= lesson.description %></p>
-            </div>
-            <div">
-              <p><strong>Duração: </strong><%= lesson.duration %> minutos</p>
-              <% if @chat_room.nil? %>
-                <p><strong>Rating:&emsp;</strong>
-                  <% lesson.rating.times do %>
-                    <%= icon("fa", "star") %>
-                  <% end %></p>
-              <% end %>
-              <p><strong>Status: </strong>
-              <% if @chat_room.nil? %>
-                <%= "Aula concluída" %>
-              <% else %>
-                <%= @lesson_request.sensei_accepted ? "Aula aceita" : "Aguardando sensei" %>
-              <% end %>
-                </p>
-              </li>
-            </div>
-          </div>
-      <% end %>
+        </p>
+      </div>
     </div>
-  </ul>
+  </li>
+  <% end %>
+</ul>
 
 

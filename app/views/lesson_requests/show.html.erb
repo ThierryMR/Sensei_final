@@ -15,16 +15,13 @@
     <h3><strong>Descrição: </strong><%= @lesson_request.description %></h3>
     <h3><strong>Duração: </strong><%= @lesson_request.duration %> minutos</h3>
     <h3><strong>Valor total: </strong><%= number_to_currency(@lesson_request.amount) %></h3>
-    <h3><strong>Status: </strong>
-      <% if @chat_room.nil? %>
-        <%= "Aula concluída" %>
-        <h3><strong>Rating: </strong></h3>
-        <% @lesson_request.rating.times do %>
-          <%= icon("fa", "star") %>
-        <% end %>
-      <% else %>
-        <%= @lesson_request.sensei_accepted ? "Aula aceita" : "Aguardando sensei" %>
+    <h3><strong>Status: </strong><%= @lesson_request.status %>
+    <% if @chat_room.nil? && @lesson_request.status != "Aguardando Sensei" %>
+      <h3><strong>Rating: </strong></h3>
+      <% @lesson_request.rating.times do %>
+        <%= icon("fa", "star") %>
       <% end %>
+    <% end %>
     </h3>
   </div>
   <% if current_user == @lesson_request.sensei.user %>

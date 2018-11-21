@@ -8,30 +8,27 @@
 
   <ul class="list-group">
     <% @lesson_requests.each do |lesson| %>
-      <div class="container">
-        <li class="list-group-item">
-          <%= link_to lesson do %>
-            <h2><strong>Aula #<%= lesson.id %></strong></h2>
+    <div class="container">
+      <li class="list-group-item">
+        <%= link_to lesson do %>
+        <h2><strong>Aula #<%= lesson.id %></strong></h2>
+        <% end %>
+        <h3><strong>Aluno: </strong><%= lesson.user.username %></h3>
+        <h3><strong>Matéria: </strong><%= lesson.subject.title %></h3>
+        <h3><strong>Descrição: </strong><%= lesson.description %></h3>
+        <h3><strong>Duração: </strong><%= lesson.duration %> minutos</h3>
+        <h3><strong>Valor total: </strong><%= number_to_currency(lesson.amount) %></h3>
+        <h3><strong>Status: </strong><%= lesson.status %></h3>
+        <h3><% if @chat_room.nil? && lesson.status != "Aguardando Sensei" %>
+            <strong>Rating: </strong>
+            <% lesson.rating.times do %>
+              <%= icon("fa", "star") %>
+            <% end %>
           <% end %>
-          <h3><strong>Aluno: </strong><%= lesson.user.username %></h3>
-          <h3><strong>Matéria: </strong><%= lesson.subject.title %></h3>
-          <h3><strong>Descrição: </strong><%= lesson.description %></h3>
-          <h3><strong>Duração: </strong><%= lesson.duration %> minutos</h3>
-          <h3><strong>Valor total: </strong><%= number_to_currency(lesson.amount) %></h3>
-          <h3><strong>Status: </strong>
-          <% if @chat_room.nil? %>
-            <%= "Aula concluída" %>
-            <h3><strong>Rating: </strong></h3>
-              <% lesson.rating.times do %>
-                <%= icon("fa", "star") %>
-              <% end %>
-          <% else %>
-            <%= @lesson_request.sensei_accepted ? "Aula aceita" : "Aguardando sensei" %>
-          <% end %>
-            </h3>
-          </li>
-        </div>
-      <% end %>
+        </h3>
+      </li>
     </div>
-  </ul>
+    <% end %>
+  </div>
+</ul>
 </div>
