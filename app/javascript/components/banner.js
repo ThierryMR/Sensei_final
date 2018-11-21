@@ -20,7 +20,7 @@ function loadDynamicBannerText() {
 }
 
 
-
+// Vem o primeiro mas nao vem o segundo, puta que pariu
 
 // function loadDynamicBannerText2() {
 //   new Typed('#banner-typed-galera', {
