@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 2018_11_21_171449) do
     t.datetime "updated_at", null: false
     t.integer "duration"
     t.integer "rating"
-    t.string "status"
+    t.string "status", default: "Aguardando Sensei"
     t.index ["sensei_id"], name: "index_lesson_requests_on_sensei_id"
     t.index ["subject_id"], name: "index_lesson_requests_on_subject_id"
     t.index ["user_id"], name: "index_lesson_requests_on_user_id"

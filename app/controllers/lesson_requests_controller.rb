@@ -24,6 +24,7 @@ class LessonRequestsController < ApplicationController
   def sensei_accepted
     @lesson_request = LessonRequest.find(params[:lesson_request_id])
     @lesson_request.sensei_accepted = true
+    @lesson_request.status = "Aula aceita"
     @lesson_request.save
     redirect_to new_chat_room_path(@lesson_request)
   end
@@ -39,6 +40,7 @@ class LessonRequestsController < ApplicationController
   def update
     @lesson_request = LessonRequest.find(params[:id])
     @lesson_request.update(params_lesson_request)
+    @lesson_request.status = "Aula concluída"
     if @lesson_request.save
       chat_room = ChatRoom.where(lesson_request_id: @lesson_request.id).first
       chat_room.destroy
