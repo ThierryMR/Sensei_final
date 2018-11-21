@@ -19,7 +19,7 @@
     <h3><strong>Duração: </strong><%= @lesson_request.duration %> minutos</h3>
     <h3><strong>Valor total: </strong><%= number_to_currency(@lesson_request.amount) %></h3>
     <h3><strong>Status: </strong><%= @lesson_request.status %>
-    <% if @chat_room.nil? && @lesson_request.status != "Aguardando Sensei" %>
+    <% if @lesson_request.status == "Aula concluída" %>
       <h3><strong>Rating: </strong></h3>
       <% @lesson_request.rating.times do %>
         <%= icon("fa", "star") %>
@@ -27,26 +27,25 @@
     <% end %>
     </h3>
   </div>
-  <% if current_user == @lesson_request.sensei.user %>
-    <% if @lesson_request.sensei_accepted == true %>
-      <button id="sensei_cancel">Cancelar a aula</button>
-      <% unless @chat_room.nil? %>
-        <%= button_to "Entrar na sala", chat_room_path(@chat_room), method: :get, class: 'btn btn-primary' unless @chat_room.nil?%>
-      <% end %>
-      <%= link_to 'Voltar', lesson_requests_path("sensei"), class: 'btn btn-primary' %>
-    <% else %>
+
+
+  <% unless @lesson_request.status == "Aula concluída" %>
+
+    <!-- Botão entrar na sala -->
+    <%= button_to "Entrar na sala", chat_room_path(@chat_room), method: :get, class: 'btn btn-primary' unless @chat_room.nil? %>
+
+    <!-- Botão para cancelar a aula -->
+    <% unless @lesson_request.status == "Cancelada" %>
+      <%= button_to "Cancelar", lesson_request_cancel_path(@lesson_request), method: :get, class: 'btn btn-danger' %>
+    <% end %>
+
+    <% if current_user == @lesson_request.sensei.user && @lesson_request.status == "Aguardando Sensei" %>
       <%= button_to "Aceitar a aula", lesson_request_sensei_accepted_path(@lesson_request), method: :get, class: 'btn btn-primary' %>
     <% end %>
-  <% else %>
-    <% if @lesson_request.sensei_accepted == true %>
-      <% unless @chat_room.nil? %>
-        <%= button_to "Entrar na sala", chat_room_path(@chat_room), method: :get, class: 'btn btn-primary' %>
-      <% end %>
-    <% else %>
-      <button id="student_cancel" class="btn btn-danger">Cancelar esta aula</button>
-    <% end %>
-    <%= link_to 'Voltar', lesson_requests_path("student"), class: 'btn btn-primary' %>
   <% end %>
+
+  <%= link_to 'Voltar', lesson_requests_path(current_user == @lesson_request.sensei.user ? "sensei" : "student"), class: 'btn btn-primary' %>
+
 </div>
 </body>
 

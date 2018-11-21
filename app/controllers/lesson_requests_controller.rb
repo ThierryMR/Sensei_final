@@ -29,6 +29,13 @@ class LessonRequestsController < ApplicationController
     redirect_to new_chat_room_path(@lesson_request)
   end
 
+  def cancel
+    @lesson_request = LessonRequest.find(params[:lesson_request_id])
+    @lesson_request.status = "Cancelada"
+    @lesson_request.save
+    redirect_to @lesson_request
+  end
+
   def index
     if params[:format] == "sensei"
       @lesson_requests = LessonRequest.where(sensei_id: current_user.sensei)
@@ -51,6 +58,6 @@ class LessonRequestsController < ApplicationController
   end
 
   def params_lesson_request
-    params.require(:lesson_request).permit(:sensei_id, :subject_id, :duration, :description, :rating)
+    params.require(:lesson_request).permit(:sensei_id, :subject_id, :duration, :description, :rating, :status)
   end
 end
