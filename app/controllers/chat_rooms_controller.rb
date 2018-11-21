@@ -1,6 +1,7 @@
 class ChatRoomsController < ApplicationController
   def show
     @chat_room = ChatRoom.includes(messages: :user).find(params[:id])
+    @lesson_request = @chat_room.lesson_request
   end
 
   def new

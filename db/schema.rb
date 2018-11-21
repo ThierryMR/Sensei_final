@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_21_171449) do
+ActiveRecord::Schema.define(version: 2018_11_21_212102) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,8 +31,7 @@ ActiveRecord::Schema.define(version: 2018_11_21_171449) do
     t.string "session_token"
     t.string "generated_token"
     t.bigint "lesson_request_id"
-    t.boolean "student_online"
-    t.boolean "sensei_online"
+    t.boolean "closed", default: false
     t.integer "rating"
     t.index ["lesson_request_id"], name: "index_chat_rooms_on_lesson_request_id"
   end
@@ -54,6 +53,7 @@ ActiveRecord::Schema.define(version: 2018_11_21_171449) do
     t.integer "duration"
     t.integer "rating"
     t.string "status", default: "Aguardando Sensei"
+    t.integer "rating_student"
     t.index ["sensei_id"], name: "index_lesson_requests_on_sensei_id"
     t.index ["subject_id"], name: "index_lesson_requests_on_subject_id"
     t.index ["user_id"], name: "index_lesson_requests_on_user_id"
@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 2018_11_21_171449) do
 
   create_table "senseis", force: :cascade do |t|
     t.bigint "user_id"
-    t.float "avg_rating"
+    t.float "avg_rating", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_senseis_on_user_id"

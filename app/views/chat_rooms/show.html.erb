@@ -54,5 +54,8 @@
       <%= render(:partial => 'shared/video', :handlers => [:erb], :formats => [:js]) %>
     <% end %>
   <% end %>
+
   <%= button_to "Finalizar a aula", chat_room_rating_path(@chat_room), method: :get %>
+
+  <%= button_to "Cancelar", lesson_request_cancel_path(@chat_room.lesson_request), method: :get, class: 'btn btn-danger' %>
 </div>
