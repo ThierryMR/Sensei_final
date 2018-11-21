@@ -2,7 +2,11 @@
   <h1 class="text-center">Rating Aula #<%= @lesson_request.id %> </h1>
 
   <%= form_for @lesson_request do |f| %>
-    <%= f.select :rating, [1, 2, 3, 4, 5] %>
+    <% if current_user.id == @lesson_request.user.id %>
+      <%= f.select :rating, [1, 2, 3, 4, 5] %>
+    <% else %>
+      <%= f.select :rating_student, [1, 2, 3, 4, 5] %>
+    <% end %>
     <%= f.submit %>
   <% end %>
 

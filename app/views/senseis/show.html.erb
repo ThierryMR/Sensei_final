@@ -27,12 +27,26 @@
               <%= link_to 'Fazer uma aula agora', new_lesson_request_path(@sensei), class: 'btn btn-primary' %>
            <% end %>
         </div>
-
-        <div>
-          <%= render 'shared/index'  %>
-        </div>
-
       </div>
+      <div class="row">
+            <h1 class="text-center">MINHAS AULAS</h1>
+            <% @lesson_requests.each do |lesson| %>
+            <div class="each-lesson col-xs-4">
+              <%= link_to lesson do %>
+              <strong>Aula #<%= lesson.id %></strong>
+              <% end %>
+              <br>
+              <strong>Matéria: </strong><%= lesson.subject.title %>
+              <br>
+              <strong>Aluno:</strong> <%= lesson.user.username %>
+              <br>
+              <%= lesson.status %> em
+              <%= lesson.updated_at.to_s.split(" ")[0].split("-").reverse.join("/") %>
+            </div>
+            <% end %>
+          </div>
     </div>
+
   </div>
+
 </div>

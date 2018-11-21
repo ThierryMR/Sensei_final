@@ -19,16 +19,20 @@
         <h3><strong>Duração: </strong><%= lesson.duration %> minutos</h3>
         <h3><strong>Valor total: </strong><%= number_to_currency(lesson.amount) %></h3>
         <h3><strong>Status: </strong><%= lesson.status %></h3>
-        <h3><% if @chat_room.nil? && lesson.status != "Aguardando Sensei" %>
-            <strong>Rating: </strong>
-            <% lesson.rating.times do %>
-              <%= icon("fa", "star") %>
-            <% end %>
-          <% end %>
-        </h3>
+        <% if lesson.rating.present? %>
+          <h3><strong>Avaliação do Sensei: </strong>
+          <% lesson.rating.times do %>
+            <%= icon("fa", "star") %>
+          <% end %></h3>
+        <% end %>
+        <% if lesson.rating_student.present? %>
+          <h3><strong>Avaliação do Estudante: </strong>
+          <% lesson.rating_student.times do %>
+            <%= icon("fa", "star") %>
+          <% end %></h3>
+        <% end %>
       </li>
     </div>
     <% end %>
-  </div>
-</ul>
+  </ul>
 </div>
