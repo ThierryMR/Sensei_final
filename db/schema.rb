@@ -31,7 +31,8 @@ ActiveRecord::Schema.define(version: 2018_11_21_212102) do
     t.string "session_token"
     t.string "generated_token"
     t.bigint "lesson_request_id"
-    t.boolean "closed", default: false
+    t.boolean "student_online"
+    t.boolean "sensei_online"
     t.integer "rating"
     t.index ["lesson_request_id"], name: "index_chat_rooms_on_lesson_request_id"
   end
@@ -81,7 +82,7 @@ ActiveRecord::Schema.define(version: 2018_11_21_212102) do
 
   create_table "senseis", force: :cascade do |t|
     t.bigint "user_id"
-    t.float "avg_rating", default: [], array: true
+    t.float "avg_rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_senseis_on_user_id"
