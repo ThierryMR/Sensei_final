@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   resources :chat_rooms, only: [:show, :index, :new] do
     resources :messages, only: [:create]
     get "/rating", to: 'chat_rooms#rating', as: :rating
-    post "/close", to: 'chat_rooms#close', as: :close
   end
 
   resources :users, only: [:show]
@@ -23,7 +22,7 @@ Rails.application.routes.draw do
 
   resources :subjects, only: [:index]
 
-  resources :lesson_requests, only: [:new, :create, :show, :index, :destroy] do
+  resources :lesson_requests, except: [:destroy] do
     get "/sensei_accepted", to: 'lesson_requests#sensei_accepted'
   end
 

@@ -15,12 +15,18 @@
     <h3><strong>Descrição: </strong><%= @lesson_request.description %></h3>
     <h3><strong>Duração: </strong><%= @lesson_request.duration %> minutos</h3>
     <h3><strong>Valor total: </strong><%= number_to_currency(@lesson_request.amount) %></h3>
-    <h3><strong>Status: </strong><%= @lesson_request.sensei_accepted ? "Aula aceita" : "Aguardando sensei" %></h3>
+    <h3><strong>Status: </strong>
+      <% if @chat_room.nil? %>
+        <%= "Aula concluída" %>
+      <% else %>
+        <%= @lesson_request.sensei_accepted ? "Aula aceita" : "Aguardando sensei" %>
+      <% end %>
+    </h3>
   </div>
   <% if current_user == @lesson_request.sensei.user %>
     <% if @lesson_request.sensei_accepted == true %>
       <button id="sensei_cancel">Cancelar a aula</button>
-      <%= button_to "Entrar na sala", chat_room_path(@chat_room), method: :get %>
+      <%= button_to "Entrar na sala", chat_room_path(@chat_room), method: :get unless @chat_room.nil?%>
     <% else %>
       <%= button_to "Aceitar a aula", lesson_request_sensei_accepted_path(@lesson_request), method: :get %>
     <% end %>

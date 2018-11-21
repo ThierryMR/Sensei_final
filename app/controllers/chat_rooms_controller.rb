@@ -11,13 +11,6 @@ class ChatRoomsController < ApplicationController
     redirect_to @chat_room
   end
 
-  def close
-    raise
-    chat_room = ChatRoom.find(params[:chat_room_id])
-    chat_room.destroy
-    redirect_to lesson_requests_path("sensei")
-  end
-
   def rating
     @chat_room = ChatRoom.find(params[:chat_room_id])
     @lesson_request = @chat_room.lesson_request
