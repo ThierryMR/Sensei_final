@@ -2,6 +2,9 @@
   <div class="banner-content">
     <h1 style="color: white" id="sensei-title">Sensei</h1>
     <h4 style="color: white">Aulas instantâneas quando você quiser</h4>
+    <h4 style= "color: white">
+       <span id="banner-typed-text"></span>
+    </h4>
     <%= form_tag senseis_path, method: :get do %>
       <%= text_field_tag :query,
         params[:query],
