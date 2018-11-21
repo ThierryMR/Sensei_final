@@ -23,9 +23,11 @@
   <br>
   <div class="container">
     <%= form_for [@sensei, @sensei_subject], :html => {:class => "form-horizontal center"} do |f| %>
-      <%= f.collection_select :subject_id, Subject.all, :id, :title %>
-      <%= f.number_field :price_per_hour %>
-      <%= f.submit %>
+     <p> <%= f.collection_select :subject_id, Subject.all, :id, :title %>
+      Preço por hora: <%= f.number_field :price_per_hour %>
+      <%= f.button :submit, class: "btn btn-primary" do  %>
+  <i class='icon-white icon-ok'></i> Crie sua Aula
+    <% end %> </p>
     <% end %>
   </div>
 </div>

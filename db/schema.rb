@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 2018_11_21_171449) do
 
   create_table "senseis", force: :cascade do |t|
     t.bigint "user_id"
-    t.float "avg_rating", default: [], array: true
+    t.float "avg_rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_senseis_on_user_id"
