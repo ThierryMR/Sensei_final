@@ -28,5 +28,6 @@ class SenseisController < ApplicationController
   def show
     @sensei = Sensei.find(params[:id])
     @senseisubs = SenseiSubject.where(sensei_id: params[:id])
+    @lesson_requests = LessonRequest.where(sensei_id: current_user.sensei)
   end
 end

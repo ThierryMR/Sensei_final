@@ -54,7 +54,5 @@
       <%= render(:partial => 'shared/video', :handlers => [:erb], :formats => [:js]) %>
     <% end %>
   <% end %>
-<% if @chat_room.nil? %>
   <%= button_to "Finalizar a aula", chat_room_rating_path(@chat_room), method: :get %>
-<% end %>
 </div>
