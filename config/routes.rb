@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
   resources :lesson_requests, except: [:destroy] do
     get "/sensei_accepted", to: 'lesson_requests#sensei_accepted'
+    get "/cancel", to: 'lesson_requests#cancel'
   end
 
   mount ActionCable.server => "/cable"

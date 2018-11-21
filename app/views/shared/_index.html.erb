@@ -16,7 +16,7 @@
       <div>
         <p><strong>Duração: </strong><%= lesson.duration %> minutos</p>
         <p><strong>Status: </strong><%= lesson.status %></p>
-        <p><% if ChatRoom.where(lesson_request_id: lesson.id).first.nil? && lesson.status != "Aguardando Sensei" %>
+        <p><% if lesson.status == "Aula concluída" %>
           <strong>Rating: </strong>
           <% lesson.rating.times do %>
           <%= icon("fa", "star") %>
