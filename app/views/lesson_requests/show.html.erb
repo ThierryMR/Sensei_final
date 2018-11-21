@@ -33,6 +33,7 @@
       <% unless @chat_room.nil? %>
         <%= button_to "Entrar na sala", chat_room_path(@chat_room), method: :get unless @chat_room.nil?%>
       <% end %>
+      <%= link_to 'Voltar', lesson_requests_path("sensei"), class: 'btn btn-primary' %>
     <% else %>
       <%= button_to "Aceitar a aula", lesson_request_sensei_accepted_path(@lesson_request), method: :get %>
     <% end %>
@@ -44,6 +45,7 @@
     <% else %>
       <button id="student_cancel">Cancelar esta aula</button>
     <% end %>
+    <%= link_to 'Voltar', lesson_requests_path("student"), class: 'btn btn-primary' %>
   <% end %>
 </div>
 
