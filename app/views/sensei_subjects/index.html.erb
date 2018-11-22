@@ -1,33 +1,43 @@
-<div class="container">
-  <div class="text-center">
-    <h1>Matérias</h1>
-  </div>
-
-  <ul class="list-group" id="sensei-subjects">
-    <% @sensei_subjects.each do |sensei_subject| %>
-      <div class="container">
-        <li class="list-group-item">
-          <%= icon('fa', 'bookmark' ) %> <%= sensei_subject.subject.title %> |
-          R$ <%= sensei_subject.price_per_hour %>/hora|
-          <%= link_to sensei_subject_path(sensei_subject),
-              method: :delete,
-              data: { confirm: "Tem certeza?" } do %>
-              <%= icon('fa', 'trash') %>
-              <% end %>
-          <br>
-        </li>
-      </div>
-    <% end %>
-  </ul>
-  <br>
-  <br>
+<body class="sensei-index">
+  <div class="sensei-profile">
   <div class="container">
-    <%= form_for [@sensei, @sensei_subject], :html => {:class => "form-horizontal center"} do |f| %>
-     <p> <%= f.collection_select :subject_id, Subject.all, :id, :title %>
-      Preço por hora: <%= f.number_field :price_per_hour %>
-      <%= f.button :submit, class: "btn btn-primary" do  %>
-  <i class='icon-white icon-ok'></i> Crie sua Aula
-    <% end %> </p>
-    <% end %>
+    <div class="text-center">
+      <h1>Suas Matérias</h1>
+    </div>
+    <ul class="list-group" id="sensei-subjects">
+      <% @sensei_subjects.each do |sensei_subject| %>
+        <div class="container">
+          <li class="list-group-item">
+            <%= icon('fa', 'bookmark' ) %> <%= sensei_subject.subject.title %> |
+            R$ <%= sensei_subject.price_per_hour %>/hora|
+            <%= link_to sensei_subject_path(sensei_subject),
+                method: :delete,
+                data: { confirm: "Tem certeza?" } do %>
+                <%= icon('fa', 'trash') %>
+                <% end %>
+            <br>
+          </li>
+        </div>
+      <% end %>
+    </ul>
+    <br>
+    <br>
+    <div class="container">
+      <%= form_for [@sensei, @sensei_subject], :html => {:class => "form-horizontal center"} do |f| %>
+       <p> <%= f.collection_select :subject_id, Subject.all, :id, :title %>
+        Preço por hora: <%= f.number_field :price_per_hour %>
+        <%= f.button :submit, class: "btn btn-primary", id: "criar-aula" do  %>
+    <i class='icon-white icon-ok'></i> Crie sua Aula
+      <% end %> </p>
+      <% end %>
+    </div>
   </div>
 </div>
+</body>
+<script>
+  var criar = document.getElementById("criar-aula")
+  criar.addEventListener("click",function(){
+    location.reload();
+    location.reload();
+  })
+</script>
