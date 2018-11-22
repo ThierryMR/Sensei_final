@@ -12,7 +12,7 @@
     <% end %>
   </div>
   <div>
-  <div style="display: none">
+ <div style="display: none">
   <%= form_for @lesson_request do |f| %>
     <% if current_user.id == @lesson_request.user.id %>
       <%= f.select :rating, [1, 2, 3, 4, 5] %>
@@ -38,6 +38,7 @@
       <% @lesson_request.save %>
       var val = document.getElementById("lesson_request_rating")
       val.lastChild.value = <%= j %>
+      val.firstChild.value = <%= j %>
       this.style.opacity = 1;
        <% while i > 0 do %>
          var previousStar = document.getElementById("estrela" + String(<%= i %>));
@@ -49,6 +50,7 @@
       <% @lesson_request.save %>
       var val = document.getElementById("lesson_request_rating_student")
       val.lastChild.value = <%= j %>
+      val.firstChild.value = <%= j %>
       this.style.opacity = 1;
       <% while i > 0 do %>
          var previousStar = document.getElementById("estrela" + String(<%= i %>));
