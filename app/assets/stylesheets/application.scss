@@ -14,7 +14,6 @@
 @import "components/index";
 @import "pages/index";
 
-
 .division1 {
   margin-left: 100px;
   height: 250px;
@@ -50,6 +49,8 @@
   background-color: white;
   padding:20px;
   margin:20px;
+  border-radius: 10px;
+  text-align: center;
 }
 
 .sensei-profile{
@@ -57,18 +58,27 @@
   padding:20px;
   margin:20px;
   border-radius: 10px;
+  text-align: center;
+}
+
+.sensei-profiles{
+  background-color: rgba(255,255,255,1) ;
+  padding:20px;
+  margin:20px;
+  border-radius: 10px;
   border: 1px solid grey;
-    text-align: center;
+  text-align: center;
 }
 
 .sensei-profile-index{
-  border: 1px solid black;
   padding:10px;
-  border-radius:5px;
+  background-color: white;
+  border: 1px solid white;
 }
 
 .sensei-profile-index:hover{
-  border: solid 1px gray;
+  border: 1px solid lightgray;
+  box-shadow: 1px 1px 1px (0,0,0,0.6);
   border-radius: 5px;
   background-color: rgba(233,233,233,0.7)
 }
@@ -91,12 +101,20 @@
   margin:7px;
 }
 
-
 .sensei-index{
-  background-image: url(https://www.freevector.com/uploads/vector/preview/2098/FreeVector-Bamboo-Background.jpg
-);
+  background-image: url(/assets/mac-background.jpg);
   background-position: 0px 0px;
-  background-repeat: repeat;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+html{
+  position: relative;
+  min-height: 100%;
+  margin: 0px;
+  padding: 0px;
+  width:100%;
 }
 
 #publisher{
@@ -159,4 +177,8 @@
 
 .lessons{
   margin-left: 15vw;
+}
+
+body{
+  height:100vh;
 }
