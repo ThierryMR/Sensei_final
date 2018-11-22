@@ -20,6 +20,14 @@
                   </div>
                   <div class="col-xs-8">
                   <h2> Sensei <%= sensei.user.username %> </h2>
+                  <% array = LessonRequest.where(sensei_id: sensei.id).map{ |e| e[:rating]} %>
+                  <% if array.length.zero? %>
+                    <p style="color: green">Sensei Novo!</p>
+                  <% else %>
+                    <% (array.sum / array.length).to_i.times do %>
+                        <%= icon("fa","star") %>
+                    <% end %>
+                  <% end %>
                   <% sensei.sensei_subjects.each do |subj| %>
                     <h5 style="color: black"><%= subj.subject.title %> | R$ <%= subj.price_per_hour %>/h</h5>
                   <% end %>

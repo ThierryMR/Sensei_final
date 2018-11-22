@@ -1,4 +1,5 @@
-<div class="banner-profile" style="background-image: url('https://pro.com/blog/wp-content/uploads/2015/01/bigstock-Bamboo-Background-50435594-e1423768775746.jpg');">
+<body class="sensei-index">
+
 <div class="container">
   <div class="sensei-profile">
       <div class="row">
@@ -12,6 +13,16 @@
             <% @senseisubs.each do |subject| %>
              |<%= subject.subject.title %>|
             <% end %>
+            <br>
+              <% if @sensei_rating.nil? %>
+                <p >Sem Ratings ainda.</p>
+              <% else %>
+              <div class="stars">
+              <% @sensei_rating.times do %>
+                <%= icon("fa", "star") %>
+              <% end %>
+              <% end %>
+            </div>
           <h4> Dando aulas desde <%= @sensei.created_at.to_s.split(" ")[0].split("-").reverse.join("/")%> </h4>
           <h5 style="color: gray"><%= @sensei.user.description %></h5>
            <% if @sensei.user == current_user %>
@@ -31,7 +42,7 @@
       <div class="row">
             <h1 class="text-center">MINHAS AULAS</h1>
             <% @lesson_requests.each do |lesson| %>
-            <div class="each-lesson col-xs-4">
+            <div class="each-lesson col-xs-3 text-center">
               <%= link_to lesson do %>
               <strong>Aula #<%= lesson.id %></strong>
               <% end %>
@@ -49,4 +60,5 @@
 
   </div>
 
-</div>
+
+</body>

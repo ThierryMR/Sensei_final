@@ -29,5 +29,11 @@ class SenseisController < ApplicationController
     @sensei = Sensei.find(params[:id])
     @senseisubs = SenseiSubject.where(sensei_id: params[:id])
     @lesson_requests = LessonRequest.where(sensei_id: current_user.sensei)
+    rating_array = LessonRequest.where(sensei_id: @sensei.id).map{ |e| e[:rating]}
+    if rating_array.empty?
+      @sensei_rating = nil
+    else
+      @sensei_rating = rating_array.sum / rating_array.length
+    end
   end
 end

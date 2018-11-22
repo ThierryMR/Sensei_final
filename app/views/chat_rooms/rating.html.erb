@@ -1,6 +1,9 @@
 <div class="container">
-  <h1 class="text-center">Rating Aula #<%= @lesson_request.id %> </h1>
-
+  <% if current_user.id == @lesson_request.user.id %>
+    <h1 class="text-center">Dê um Rating para Sensei <%= @lesson_request.sensei.user.username %> </h1>
+  <% else %>
+    <h1 class="text-center">Avalie o estudante <%= @lesson_request.user.username %> </h1>
+  <% end %>
   <%= form_for @lesson_request do |f| %>
     <% if current_user.id == @lesson_request.user.id %>
       <%= f.select :rating, [1, 2, 3, 4, 5] %>
@@ -9,6 +12,4 @@
     <% end %>
     <%= f.submit %>
   <% end %>
-
-
 </div>
