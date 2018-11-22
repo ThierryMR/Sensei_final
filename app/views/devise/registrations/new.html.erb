@@ -1,5 +1,7 @@
 <body class="sensei-index">
   <div class="container">
+    <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+
     <div class="login-container">
       <h2>Criar Conta</h2>
 
@@ -32,11 +34,12 @@
           <%= f.input :photo_cache, as: :hidden %>
         </div>
        <div class="form-actions">
-          <%= f.button :submit, "Confirmar" %>
+          <%= f.button :submit, "Confirmar", class: "btn btn-primary" %>
         </div>
       <% end %>
 
       <%= render "devise/shared/links" %>
+    </div>
     </div>
   </div>
 </body>
