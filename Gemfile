@@ -41,3 +41,6 @@ end
 group :development do
   gem 'rails_real_favicon'
 end
+
+gem 'rack-ssl-enforcer', group: :production
+

@@ -8,13 +8,13 @@ function loadDynamicBannerText() {
     loop: true
   });
 
-
    new Typed('#banner-typed-galera', {
     strings: ["Conheça a galera", "Passe o mouse"],
     typeSpeed: 50,
     loop: true
 
   });
+
 
 
 }
