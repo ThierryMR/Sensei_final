@@ -43,4 +43,3 @@ group :development do
 end
 
 gem 'rack-ssl-enforcer', group: :production
-
