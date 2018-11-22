@@ -125,7 +125,7 @@
 
 
 .each-lesson{
-  margin:10px;
+  margin:5px;
   padding:10px;
   background-color: rgba(255,255,255,0.8);
   border-radius:10px;
@@ -133,5 +133,9 @@
 
 .each-lesson:hover{
   background-color: rgba(233,233,233,0.8);
-  border: 1px solid gray;
+}
+
+.stars{
+  color: orange;
+  font-size: 50px;
 }
