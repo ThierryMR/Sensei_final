@@ -4,12 +4,62 @@
   <% else %>
     <h1 class="text-center">Avalie o estudante <%= @lesson_request.user.username %> </h1>
   <% end %>
+    <div class="estrelas">
+    <% 5.times do |i|%>
+    <span class="estrela" id=<%= "estrela" + (i + 1).to_s %>>
+      <%= icon("fa","star")%>
+    </span>
+    <% end %>
+  </div>
+  <div>
+  <div style="display: none">
   <%= form_for @lesson_request do |f| %>
     <% if current_user.id == @lesson_request.user.id %>
       <%= f.select :rating, [1, 2, 3, 4, 5] %>
     <% else %>
       <%= f.select :rating_student, [1, 2, 3, 4, 5] %>
     <% end %>
-    <%= f.submit %>
+  </div>
+  </div>
+  <div class="text-center">
+    <%= f.submit "Confirmar", class: "btn btn-success" %>
+  </div>
   <% end %>
 </div>
+
+<script>
+  var r = 1;
+  <% 5.times do |i| %>
+  <% j = i + 1 %>
+  var star = document.getElementById("estrela" + String(<%= j %>));
+  star.addEventListener("click", function(){
+    <% if current_user.id == @lesson_request.user.id %>
+      <% @lesson_request.rating = j %>
+      <% @lesson_request.save %>
+      var val = document.getElementById("lesson_request_rating")
+      val.lastChild.value = <%= j %>
+      this.style.opacity = 1;
+       <% while i > 0 do %>
+         var previousStar = document.getElementById("estrela" + String(<%= i %>));
+          previousStar.style.opacity = 1
+          <% i -= 1 %>
+        <% end %>
+    <% else %>
+      <% @lesson_request.rating_student = j %>
+      <% @lesson_request.save %>
+      var val = document.getElementById("lesson_request_rating_student")
+      val.lastChild.value = <%= j %>
+      this.style.opacity = 1;
+      <% while i > 0 do %>
+         var previousStar = document.getElementById("estrela" + String(<%= i %>));
+          previousStar.style.opacity = 1
+          <% i -= 1 %>
+        <% end %>
+      <% while i > 1 do %>
+        this.previousElementSibling.style.opacity = 1;
+        <% i -= 1 %>
+      <% end %>
+    <% end %>
+  });
+  <% end %>
+</script>

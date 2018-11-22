@@ -1,9 +1,8 @@
 <div class="banner" style="background-image:linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('https://images.pexels.com/photos/1438081/pexels-photo-1438081.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');">
   <div class="banner-content">
     <h1 style="color: white" id="sensei-title">Sensei</h1>
-    <h4 style="color: white">Aulas instantâneas quando você quiser</h4>
     <h4 style= "color: white">
-       <span id="banner-typed-text"></span>
+       Aulas instantâneas de <span id="banner-typed-text"></span>
     </h4>
     <%= form_tag senseis_path, method: :get do %>
       <%= text_field_tag :query,

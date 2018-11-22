@@ -30,10 +30,10 @@ class SenseisController < ApplicationController
     @senseisubs = SenseiSubject.where(sensei_id: params[:id])
     @lesson_requests = LessonRequest.where(sensei_id: current_user.sensei)
     rating_array = LessonRequest.where(sensei_id: @sensei.id).map{ |e| e[:rating]}
-    if rating_array.empty?
+    if rating_array.compact.empty?
       @sensei_rating = nil
     else
-      @sensei_rating = rating_array.sum / rating_array.length
+      @sensei_rating = rating_array.compact.sum / rating_array.compact.length
     end
   end
 end
