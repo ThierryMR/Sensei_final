@@ -32,33 +32,34 @@
                 <%= link_to 'Adicione mais matérias que deseja ensinar', sensei_sensei_subjects_path(@sensei), class: 'btn btn-primary' %>
               <% end %>
               <br>
-              <br>
-              <%= link_to 'Minhas aulas - Sensei', lesson_requests_path("sensei"), class: 'btn btn-primary' %>
             <% else %>
-              <%= link_to 'Fazer uma aula agora', new_lesson_request_path(@sensei), class: 'btn btn-primary' %>
+              <%= link_to 'Fazer uma aula agora!', new_lesson_request_path(@sensei), class: 'btn btn-success btn-lg' %>
            <% end %>
         </div>
       </div>
+      <% if @sensei.user == current_user %>
       <div class="row">
-            <h1 class="text-center">MINHAS AULAS</h1>
-            <% @lesson_requests.each do |lesson| %>
-            <div class="each-lesson col-xs-3 text-center">
-              <%= link_to lesson do %>
-              <strong>Aula #<%= lesson.id %></strong>
-              <% end %>
-              <br>
-              <strong>Matéria: </strong><%= lesson.subject.title %>
-              <br>
-              <strong>Aluno:</strong> <%= lesson.user.username %>
-              <br>
-              <%= lesson.status %> em
-              <%= lesson.updated_at.to_s.split(" ")[0].split("-").reverse.join("/") %>
-            </div>
+            <% if @lesson_requests.empty? == false %>
+            <h1 class="text-center">Aulas recentes <%= link_to 'Ver todas', lesson_requests_path("sensei"), class: 'btn btn-success' %></h1>
+            <div class="lessons">
+              <% @lesson_requests.last(3).each do |lesson| %>
+              <div class="each-lesson col-xs-3 text-center">
+                <%= link_to lesson do %>
+                <strong>Aula #<%= lesson.id %></strong>
+                <% end %>
+                <br>
+                <strong>Matéria: </strong><%= lesson.subject.title %>
+                <br>
+                <strong>Aluno:</strong> <%= lesson.user.username %>
+                <br>
+                <%= lesson.status %> em
+                <%= lesson.updated_at.to_s.split(" ")[0].split("-").reverse.join("/") %>
+              </div>
             <% end %>
           </div>
+          <% end %>
+      </div>
     </div>
-
+    <% end %>
   </div>
-
-
 </body>
