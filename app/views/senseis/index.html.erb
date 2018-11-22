@@ -1,12 +1,12 @@
-<body class="sensei-index">
+<div class="sensei-index">
   <div class="container">
-    <div class="sensei-profile">
+    <div class="sensei-profiles">
       <% if params[:query].nil? || params[:query].empty? %>
-        <h1 class="text-center"> Senseis</h1>
+        <h1 class="text-center"> SENSEIS </h1>
       <% else %>
         <h1 class="text-center"> Senseis de <%= params[:query] %> <i class="fas fa-chalkboard-teacher"></i></h1>
       <% end %>
-      <div class="row senseis-container">
+      <div class="row senseiscontainer">
         <% if @senseis.length.zero? %>
         <h4 style="color: gray; text-align: center"> Desculpe, não há Senseis disponíveis para "<%= params[:query] %>"</h4>
         <% end %>
@@ -19,13 +19,15 @@
                   <%= cl_image_tag sensei.user.photo , height: 200, width: 200,class: 'img-circle', crop: :fill;%>
                   </div>
                   <div class="col-xs-8">
-                  <h2> Sensei <%= sensei.user.username %> </h2>
+                  <h2 style="color: black;"> <%= sensei.user.username %> </h2>
                   <% array = LessonRequest.where(sensei_id: sensei.id).map{ |e| e[:rating]} %>
                   <% if array.compact.length.zero? %>
                     <p style="color: green">Sensei Novo!</p>
                   <% else %>
                     <% (array.compact.sum / array.compact.length).to_i.times do %>
+                       <span class="sensei-star">
                         <%= icon("fa","star") %>
+                      </span>
                     <% end %>
                   <% end %>
                   <% sensei.sensei_subjects.each do |subj| %>
@@ -40,4 +42,4 @@
       </div>
     </div>
   </div>
-</body>
+</div>
