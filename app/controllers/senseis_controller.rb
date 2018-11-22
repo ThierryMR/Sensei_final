@@ -28,7 +28,9 @@ class SenseisController < ApplicationController
   def show
     @sensei = Sensei.find(params[:id])
     @senseisubs = SenseiSubject.where(sensei_id: params[:id])
-    @lesson_requests = LessonRequest.where(sensei_id: current_user.sensei)
+    @user = @sensei.user
+    @lesson_requests = LessonRequest.where(sensei_id: @user)
+
     rating_array = LessonRequest.where(sensei_id: @sensei.id).map{ |e| e[:rating]}
     if rating_array.compact.empty?
       @sensei_rating = nil
