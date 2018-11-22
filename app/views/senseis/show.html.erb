@@ -40,7 +40,7 @@
       <% if @sensei.user == current_user %>
       <div class="row">
             <% if @lesson_requests.empty? == false %>
-            <h1 class="text-center">Aulas recentes <%= link_to 'Ver todas', lesson_requests_path("sensei"), class: 'btn btn-success' %></h1>
+            <h1 class="text-center" style="color: white;">Aulas recentes <%= link_to 'Ver todas', lesson_requests_path("sensei"), class: 'btn btn-success' %></h1>
             <div class="lessons">
               <% @lesson_requests.last(3).each do |lesson| %>
               <div class="each-lesson col-xs-3 text-center">
