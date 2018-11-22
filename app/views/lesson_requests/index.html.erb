@@ -1,42 +1,46 @@
 <div class="container">
   <% if params[:format] == "sensei" %>
-  <h1 class="text-center">Minhas aulas - Sensei <strong><%= current_user.sensei.user.username %></strong></h1>
+  <h2 class="text-center">Minhas aulas - Sensei <strong><%= current_user.sensei.user.username %></strong></h2>
   <% else %>
-  <h1 class="text-center">Minhas aulas - Estudante</h1>
+  <h2 class="text-center">Minhas aulas - Estudante</h2>
   <% end %>
 
-
-  <ul class="list-group">
-    <% @lesson_requests.each do |lesson| %>
-    <div class="container requests-index">
-      <div class="row">
-          <div class="col-xs-6">
-          <%= link_to lesson do %>
-          <h2><strong>Aula #<%= lesson.id %></strong></h2>
-          <% end %>
-          <h3><strong>Aluno: </strong><%= lesson.user.username %></h3>
-          <h3><strong>Matéria: </strong><%= lesson.subject.title %></h3>
-          <h3><strong>Descrição: </strong><%= lesson.description %></h3>
-          </div>
-          <div class="col-xs-6">
-          <h3><strong>Duração: </strong><%= lesson.duration %> minutos</h3>
-          <h3><strong>Valor total: </strong><%= number_to_currency(lesson.amount) %></h3>
-          <h3><strong>Status: </strong><%= lesson.status %></h3>
-          <% if lesson.rating.present? %>
-            <h3><strong>Avaliação do Sensei: </strong>
-            <% lesson.rating.times do %>
-              <%= icon("fa", "star") %>
-            <% end %></h3>
-          <% end %>
-          <% if lesson.rating_student.present? %>
-            <h3><strong>Avaliação do Estudante: </strong>
-            <% lesson.rating_student.times do %>
-              <%= icon("fa", "star") %>
-            <% end %></h3>
-          <% end %>
-        </div>
+  <% @lesson_requests.each do |lesson| %>
+    <div class="message">
+      <% if current_user.id == lesson.sensei.user.id %>
+        <%= cl_image_tag lesson.user.photo, class:"avatar-large" %>
+      <% else %>
+        <%= cl_image_tag lesson.sensei.user.photo, class:"avatar-large" %>
+      <% end %>
+      <div class="message-name">
+        <% if current_user.id == lesson.sensei.user.id %>
+          <h3><%= lesson.user.username %></h3>
+        <% else %>
+          <h3><%= lesson.sensei.user.username %></h3>
+        <% end %>
+        <p>Atualizado em<br><%= lesson.updated_at.to_s.split(" ")[0].split("-").reverse.join("/") %></p>
+      </div>
+      <div class="message-body">
+        <p><%= link_to lesson do %>
+          <strong>Aula #<%= lesson.id %></strong>
+        <% end %></p>
+        <p>Matéria: <strong><%= lesson.subject.title %></strong></p>
+        <p>
+          Descrição: <strong><%= lesson.description %></strong>
+        </p>
+      </div>
+      <div class="message-status">
+        <% if lesson.status == "Aula concluída" %>
+          <p class="status done">Aula concluída</p>
+        <% elsif lesson.status == "Aguardando Sensei" %>
+          <p class="status pending">Aguardando Sensei</p>
+        <% elsif lesson.status == "Cancelada" %>
+          <p class="status declined">Cancelada</p>
+        <% else %>
+          <p class="status accepted">Aula aceita</p>
+        <% end %>
+        <p class="price"><%= number_to_currency(lesson.amount, unit: "R$ ") %></p>
       </div>
     </div>
-    <% end %>
-  </ul>
+  <% end %>
 </div>

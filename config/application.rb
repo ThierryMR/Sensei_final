@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 module LiveChatTest
   class Application < Rails::Application
 
-    config.middleware.insert_before  ActionDispatch::Cookies, Rack::SslEnforcer
+    config.middleware.insert_before  ActionDispatch::Cookies, Rack::SslEnforcer if Rails.env.production?
 
     config.action_view.embed_authenticity_token_in_remote_forms = true
     config.generators do |generate|
