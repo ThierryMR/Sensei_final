@@ -1,14 +1,11 @@
 <div>
-    <div id="videos">
-        <div class="row">
-          <div class="col-xs-12">
-            <div id="publisher"> Sua câmera</div><div id="subscriber"></div>
-          </div>
-        </div>
+  <div id="videos">
+      <div class="row">
+        <div class="col-xs-12">
+          <div id="publisher"> Sua câmera</div><div id="subscriber"></div>
       </div>
-
-
-
+    </div>
+  </div>
   <% content_for(:after_js) do %>
     <%= javascript_tag do %>
       <%= render(:partial => 'shared/video', :handlers => [:erb], :formats => [:js]) %>
