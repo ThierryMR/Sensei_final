@@ -43,15 +43,15 @@
   </div>
   <div class="text-center">
   <% unless @lesson_request.status == "Aula concluída" || @lesson_request.status == "Cancelada" %>
-
+    <br>
     <!-- Botão entrar na sala -->
     <%= button_to "Entrar na sala", chat_room_path(@chat_room), method: :get, class: 'btn btn-primary' unless @chat_room.nil? %>
-
+    <br>
     <!-- Botão para cancelar a aula -->
     <% unless @lesson_request.status == "Cancelada" %>
       <%= button_to "Cancelar", lesson_request_cancel_path(@lesson_request), method: :get, class: 'btn btn-danger' %>
     <% end %>
-
+    <br>
     <% if current_user == @lesson_request.sensei.user && @lesson_request.status == "Aguardando Sensei" %>
       <%= button_to "Aceitar a aula", lesson_request_sensei_accepted_path(@lesson_request), method: :get, class: 'btn btn-primary' %>
     <% end %>

@@ -27,22 +27,25 @@
         <%= cl_image_tag current_user.photo, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
         <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
           <% if current_user.sensei.present? %>
-          <li> <%= link_to "Sensei Profile", sensei_path(current_user.sensei), class: "navbar-wagon-item navbar-wagon-link" %> </li>
+          <li> <%= link_to sensei_path(current_user.sensei) do %>
+            <i class="fa fa-user"></i> <%= t(".profile", default: "Sensei") %>
+            <% end %>
+          </li>
           <% end %>
           <li>
             <%= link_to user_path(current_user) do %>
-            <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
+            <i class="fa fa-user"></i> <%= t(".profile", default: "Estudante") %>
             <% end %>
           </li>
 
           <li>
             <%= link_to edit_user_registration_path(@user) do %>
-            <i class="fa fa-cog"></i>  <%= t(".settings", default: "Settings") %>
+            <i class="fa fa-cog"></i>  <%= t(".settings", default: "Configurações") %>
             <% end %>
           </li>
           <li>
             <%= link_to destroy_user_session_path, method: :delete do %>
-            <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
+            <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Sair") %>
             <% end %>
           </li>
         </ul>
@@ -51,7 +54,7 @@
     <% else %>
     <!-- Login link (when logged out) -->
     <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "btn btn-default" %>
-    <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-danger button" %>
+    <%= link_to "Cadastrar", new_user_registration_path, class: "btn btn-danger button" %>
     <% end %>
   </div>
 
@@ -62,29 +65,32 @@
         <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
         <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
           <% if current_user.sensei.present? %>
-            <li> <%= link_to "Sensei Profile", sensei_path(current_user.sensei), class: "navbar-wagon-item navbar-wagon-link" %> </li>
+            <li> <%= link_to sensei_path(current_user.sensei) do %>
+            <i class="fa fa-user"></i> <%= t(".profile", default: "Sensei") %>
+            <% end %>
+          </li>
             <% end %>
             <li>
               <%= link_to user_path(current_user) do %>
-              <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
+              <i class="fa fa-user"></i> <%= t(".profile", default: "Estudante") %>
               <% end %>
             </li>
 
             <li>
               <%= link_to edit_user_registration_path(@user) do %>
-              <i class="fa fa-cog"></i>  <%= t(".settings", default: "Settings") %>
+              <i class="fa fa-cog"></i>  <%= t(".settings", default: "Configurações") %>
               <% end %>
             </li>
             <li>
               <%= link_to destroy_user_session_path, method: :delete do %>
-              <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
+              <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Sair") %>
               <% end %>
             </li>
         </ul>
       </div>
     <% else %>
       <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "btn btn-default" %>
-      <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-danger button" %>
+      <%= link_to "Cadastrar", new_user_registration_path, class: "btn btn-danger button" %>
     <% end %>
   </div>
 </div>
