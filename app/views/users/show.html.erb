@@ -1,4 +1,4 @@
-<div class="banner-profile" style="background-image: url('https://pennywise.sg/wp-content/uploads/2017/03/coffee-wooden-mac-theme-good-morning-21824.jpg');">
+<body class="sensei-index">
   <div class="container">
     <div class="sensei-profile">
       <div class="row">
@@ -11,7 +11,7 @@
           <h5 style="color: gray"><%= @user.description %></h5>
           <%= link_to 'Minhas aulas - Estudante', lesson_requests_path("student"), class: 'btn btn-primary' %>
           <% if @user.sensei %>
-          <h2><%= link_to "Sensei Dashboard", @user.sensei %></h2>
+          <h2><%= link_to "Perfil Sensei", @user.sensei %></h2>
           <% else %>
           <div class="wrapp">
             <h2>
@@ -27,6 +27,5 @@
       </div>
     </div>
   </div>
-
-
 </div>
+</body>
